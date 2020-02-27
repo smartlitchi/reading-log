@@ -14,7 +14,7 @@ def generate_html(books_list):
     return(template.render(months=books_list))
 
 def sort_by_date(books_list):
-    epoch = parse(books[0]["date"])
+    epoch = parse(books_list[0]["date"])
     monthly_books = list()
     reading_list = list()
     for book in books_list:
@@ -27,8 +27,12 @@ def sort_by_date(books_list):
     reading_list.append(monthly_books)
     return reading_list
 
-books = get_books("assets/reading_log.json")
-books_sorted = sort_by_date(books)
+def parse_json(json_file):
+    books = get_books(json_file)
+    books_sorted = sort_by_date(books)
+    return books_sorted
+
+books_parsed = parse_json("assets/reading_log.json")
 
 with open('render/reading_log.html', 'w') as webpage:
-    webpage.write(generate_html(books_sorted))
+    webpage.write(generate_html(books_parsed))
