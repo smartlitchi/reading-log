@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 import json
 import jinja2
 from dateutil.parser import parse
@@ -18,6 +20,16 @@ def parse_new_books(monthly_log):
                 new_book = []
                 counting_lines = 0
     return new_books
+
+def get_isbn(book_dict):
+    search = book_dict['title'] + book_dict['author']
+    url = "https://isbnsearch.org/search"
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1'}
+    params = {'s': search.replace(' ', '+')}
+    response = requests.get(url, params, headers=headers)
+    parsed_response = BeautifulSoup(response.text, features="html.parser")
+    book_info = parsed_response.find_all('div')
+    print(book_info)
 
 def get_books(json_file):
     with open(json_file, "r") as read_file:
@@ -56,6 +68,6 @@ def render_html(books):
 
 if __name__ == "__main__":
     books_of_the_month = parse_new_books('assets/monthly_reports/jan2020.txt')
-    print(books_of_the_month)
+    get_isbn(books_of_the_month[2])
     #books_parsed = parse_json("assets/reading_log.json")
     #render_html(books_parsed)
