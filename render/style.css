@@ -1,0 +1,19 @@
+.container {
+    float: left;
+    width: 130px;
+    height: 200px;
+    margin: 0 30px 30px 0;
+    position: relative;
+}
+
+.container img.cover {
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    border:solid #b6b596 1px;
+}
+
+.month {
+    clear: left;
+    padding-top: 20px;
+}
