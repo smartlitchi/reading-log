@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}My Reading Log{% endblock %}
+
+{% block content %}
+    {% for month in months %}
+        <div class="month">
+            <h4>{{ month[0].date }}</h4>
+            {% for book in month %}
+                <div class="container">
+                    <img class="cover" src="../assets/covers/{{book.ISBN}}.jpg" alt="{{book.title}} by {{book.author}}" title="{{book.title}} by {{book.author}}" />
+                    {{book.rating}}/10
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
