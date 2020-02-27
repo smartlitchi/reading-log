@@ -32,7 +32,11 @@ def parse_json(json_file):
     books_sorted = sort_by_date(books)
     return books_sorted
 
-books_parsed = parse_json("assets/reading_log.json")
+def render_html(books):
+    with open('render/reading_log.html', 'w') as webpage:
+        webpage.write(generate_html(books))
+        print("webpage successfully rendered")
 
-with open('render/reading_log.html', 'w') as webpage:
-    webpage.write(generate_html(books_parsed))
+if __name__ == "__main__":
+    books_parsed = parse_json("assets/reading_log.json")
+    render_html(books_parsed)
