@@ -24,7 +24,7 @@ def parse_new_books(monthly_log):
                 new_books.append(dict(zip(fields, new_book)))
                 new_book = []
                 counting_lines = 0
-    return new_books
+    return new_books[::-1]
 
 def get_isbn(book_dict):
     search = book_dict['title'] + ' ' + book_dict['author']
@@ -41,9 +41,12 @@ def get_isbn(book_dict):
     return book_isbn.split()[-1]
 
 def add_monthly_books(json_file, monthly_log):
-    with open(json_file, "r") as write_file:
-        log = json.load(write_file)
-        print(log)
+    with open(json_file, "r") as read_file:
+        log = json.load(read_file)
+    new_log = monthly_log + log['books']
+    log['books'] = new_log
+    with open(json_file, 'w') as write_file:
+        json.dump(log, write_file)
 
 def get_books(json_file):
     with open(json_file, "r") as read_file:
@@ -84,6 +87,7 @@ if __name__ == "__main__":
     monthly_log = 'assets/monthly_reports/jan2020.txt'
     json_file = 'assets/reading_log.json'
     books_of_the_month = parse_new_books(monthly_log)
-    print(books_of_the_month)
-    #books_parsed = parse_json("assets/reading_log.json")
-    #render_html(books_parsed)
+    books_parsed = parse_json(json_file)
+    add_monthly_books(json_file, books_of_the_month)
+    books_parsed = parse_json("assets/reading_log.json")
+    render_html(books_parsed)
