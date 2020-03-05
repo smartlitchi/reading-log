@@ -6,9 +6,12 @@ import jinja2
 from dateutil.parser import parse
 
 def parse_new_books(monthly_log):
-    fields = ["title", "author", "rating"]
+    fields = ["title", "author", "rating", "date"]
     new_book = list()
     new_books = list()
+    file_name = monthly_log.split('/')[-1]
+    monthly_date = parse(file_name.split('.')[0])
+    monthly_date = monthly_date.strftime('%B %Y')
     counting_lines = 0
     with open(monthly_log, 'r') as log:
         for index, line in enumerate(log.readlines()):
@@ -17,6 +20,7 @@ def parse_new_books(monthly_log):
                 counting_lines += 1
             else:
                 new_book[-1] = float(new_book[-1])  # convert ratings into float
+                new_book.append(monthly_date)
                 new_books.append(dict(zip(fields, new_book)))
                 new_book = []
                 counting_lines = 0
@@ -30,8 +34,16 @@ def get_isbn(book_dict):
     response = requests.get(url, params, headers=headers)
     parsed_response = BeautifulSoup(response.text, features="html.parser")
     book_info = parsed_response.find(class_='bookinfo')
-    book_isbn = book_info.find(string=re.compile('ISBN-13'))
+    try:
+        book_isbn = book_info.find(string=re.compile('ISBN-13'))
+    except AttributeError:
+        return 'ISBN not found'
     return book_isbn.split()[-1]
+
+def add_monthly_books(json_file, monthly_log):
+    with open(json_file, "r") as write_file:
+        log = json.load(write_file)
+        print(log)
 
 def get_books(json_file):
     with open(json_file, "r") as read_file:
@@ -69,8 +81,9 @@ def render_html(books):
         print("webpage successfully rendered")
 
 if __name__ == "__main__":
-    books_of_the_month = parse_new_books('assets/monthly_reports/jan2020.txt')
-    for book in books_of_the_month:
-        print(get_isbn(book))
+    monthly_log = 'assets/monthly_reports/jan2020.txt'
+    json_file = 'assets/reading_log.json'
+    books_of_the_month = parse_new_books(monthly_log)
+    print(books_of_the_month)
     #books_parsed = parse_json("assets/reading_log.json")
     #render_html(books_parsed)
