@@ -6,7 +6,7 @@ import jinja2
 from dateutil.parser import parse
 
 def parse_new_books(monthly_log):
-    fields = ["title", "author", "rating", "date"]
+    fields = ["title", "author", "ISBN", "rating", "date"]
     new_book = list()
     new_books = list()
     file_name = monthly_log.split('/')[-1]
@@ -15,7 +15,7 @@ def parse_new_books(monthly_log):
     counting_lines = 0
     with open(monthly_log, 'r') as log:
         for index, line in enumerate(log.readlines()):
-            if counting_lines < 3:
+            if counting_lines < 4:
                 new_book.append(line.rstrip())
                 counting_lines += 1
             else:
