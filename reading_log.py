@@ -88,6 +88,6 @@ if __name__ == "__main__":
     json_file = 'assets/reading_log.json'
     books_of_the_month = parse_new_books(monthly_log)
     books_parsed = parse_json(json_file)
-    add_monthly_books(json_file, books_of_the_month)
+    #add_monthly_books(json_file, books_of_the_month)
     books_parsed = parse_json("assets/reading_log.json")
     render_html(books_parsed)
