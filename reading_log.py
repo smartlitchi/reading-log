@@ -14,7 +14,9 @@ def parse_new_books(monthly_log):
     monthly_date = monthly_date.strftime('%B %Y')
     counting_lines = 0
     with open(monthly_log, 'r') as log:
-        for index, line in enumerate(log.readlines()):
+        log_lines = log.readlines()
+        log_lines.append('')  # adding a last line to avoid skipping last entry
+        for index, line in enumerate(log_lines):
             if counting_lines < 4:
                 new_book.append(line.rstrip())
                 counting_lines += 1
@@ -84,10 +86,10 @@ def render_html(books):
         print("webpage successfully rendered")
 
 if __name__ == "__main__":
-    monthly_log = 'assets/monthly_reports/feb2020.txt'
+    monthly_log = 'assets/monthly_reports/mar2020.txt'
     json_file = 'assets/reading_log.json'
     books_of_the_month = parse_new_books(monthly_log)
     books_parsed = parse_json(json_file)
-    #add_monthly_books(json_file, books_of_the_month)
+    add_monthly_books(json_file, books_of_the_month)
     books_parsed = parse_json("assets/reading_log.json")
     render_html(books_parsed)
