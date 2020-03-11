@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
 import re
 import json
 import jinja2
@@ -27,20 +26,6 @@ def parse_new_books(monthly_log):
                 new_book = []
                 counting_lines = 0
     return new_books[::-1]
-
-def get_isbn(book_dict):
-    search = book_dict['title'] + ' ' + book_dict['author']
-    url = "https://isbnsearch.org/search"
-    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1'}
-    params = {'s': search.replace(' ', '+')}
-    response = requests.get(url, params, headers=headers)
-    parsed_response = BeautifulSoup(response.text, features="html.parser")
-    book_info = parsed_response.find(class_='bookinfo')
-    try:
-        book_isbn = book_info.find(string=re.compile('ISBN-13'))
-    except AttributeError:
-        return 'ISBN not found'
-    return book_isbn.split()[-1]
 
 def add_monthly_books(json_file, monthly_log):
     with open(json_file, "r") as read_file:
