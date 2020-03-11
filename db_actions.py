@@ -30,6 +30,16 @@ def sort_by_date(books_list):
     reading_list.append(monthly_books)
     return reading_list
 
+def write_json(log, json_file):
+    """
+    Write log file to json database
+
+    log -- dictionnary of a json read
+    json_file -- str, path to the json dbase
+    """
+    with open(json_file, 'w') as write_file:
+        json.dump(log, write_file)
+
 def add_monthly_books(json_file, monthly_log):
     """
     Write the new books into the json database
@@ -42,10 +52,9 @@ def add_monthly_books(json_file, monthly_log):
         log = json.load(read_file)
     new_log = monthly_log + log['books']
     log['books'] = new_log
-    with open(json_file, 'w') as write_file:
-        json.dump(log, write_file)
+    write_json(log, json_file)
 
-def parse_json(json_file):
+def read_json(json_file):
     """
     Returns the list of all books
 
