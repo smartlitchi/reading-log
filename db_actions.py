@@ -12,9 +12,9 @@ def get_books(json_file):
         log = json.load(read_file)
     return log["books"]
 
-def sort_by_date(books_list):
+def sort_by_month(books_list):
     """
-    Returns a sorted list of books. The sorting is in reverse chronological order
+    Returns a list OF LISTS of books. The sorting is in reverse chronological order
 
     books_list -- a list of books
     """
@@ -57,12 +57,12 @@ def add_monthly_books(json_file, monthly_log):
 
 def read_json(json_file):
     """
-    Returns the list of all books
+    Returns a list of lists of books
 
     json_file -- string of json database's path
     """
     books = get_books(json_file)
-    books_sorted = sort_by_date(books)
+    books_sorted = sort_by_month(books)
     return books_sorted
 
 def add_tag(book, new_tag):
