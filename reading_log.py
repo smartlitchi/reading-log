@@ -7,5 +7,5 @@ if __name__ == "__main__":
     json_file = 'assets/reading_log.json'
     books_of_the_month = new_books.parse_new_books(monthly_log)
     books_parsed = db_actions.parse_json(json_file)
-    #new_book.add_monthly_books(json_file, books_of_the_month)
+    #db_actions.add_monthly_books(json_file, books_of_the_month)
     web_render.render_html(books_parsed)
