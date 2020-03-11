@@ -2,6 +2,11 @@ from dateutil.parser import parse
 import json
 
 def parse_new_books(monthly_log):
+    """
+    Reads a txt and returns a list of books
+
+    monthly_log -- a string indicating the path of new books report
+    """
     fields = ["title", "author", "ISBN", "rating", "date"]
     new_book = list()
     new_books = list()
@@ -25,6 +30,13 @@ def parse_new_books(monthly_log):
     return new_books[::-1]
 
 def add_monthly_books(json_file, monthly_log):
+    """
+    Write the new books into the json database
+    Doesn't return anything
+
+    json_file -- a string, path of json database
+    monthly_log -- a list, new books to be added
+    """
     with open(json_file, "r") as read_file:
         log = json.load(read_file)
     new_log = monthly_log + log['books']
