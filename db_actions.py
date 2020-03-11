@@ -1,5 +1,6 @@
 import json
 from dateutil.parser import parse
+import hashlib
 
 def get_books(json_file):
     """
@@ -63,3 +64,25 @@ def read_json(json_file):
     books = get_books(json_file)
     books_sorted = sort_by_date(books)
     return books_sorted
+
+def add_tag(book, new_tag):
+    """
+    Adds a new tag to a book in json database and returns a copy of the book
+
+    book -- dictionary containing all the infos of a single book
+    new_tag -- tuple, (tag key, tag value) to be added
+    """
+    modified_book = book
+    tag_key, tag_value = new_tag
+    modified_book[tag_key] = tag_value
+    return modified_book
+
+def gen_unique_id(book):
+    """
+    Makes an unique id for each entry in the database
+
+    book -- dictionary containing all the infos of a single book
+    """
+    book_title = book['title']
+    book_ISBN = str(book['ISBN'])
+    return hashlib.md5((book_ISBN + book_title).encode('utf-8')).hexdigest()
