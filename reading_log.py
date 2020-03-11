@@ -1,5 +1,3 @@
-import requests
-import re
 import json
 import jinja2
 from dateutil.parser import parse
