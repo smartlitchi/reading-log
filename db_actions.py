@@ -31,29 +31,17 @@ def sort_by_month(books_list):
     reading_list.append(monthly_books)
     return reading_list
 
-def write_json(log, json_file):
+def write_json(books, json_file):
     """
     Write log file to json database
 
-    log -- dictionnary of a json read
+    books -- list of books
     json_file -- str, path to the json dbase
     """
     with open(json_file, 'w') as write_file:
+        log = dict()
+        log['books'] = books
         json.dump(log, write_file)
-
-def add_monthly_books(json_file, monthly_log):
-    """
-    Write the new books into the json database
-    Doesn't return anything
-
-    json_file -- a string, path of json database
-    monthly_log -- a list, new books to be added
-    """
-    with open(json_file, "r") as read_file:
-        log = json.load(read_file)
-    new_log = monthly_log + log['books']
-    log['books'] = new_log
-    write_json(log, json_file)
 
 def read_json(json_file):
     """
@@ -64,6 +52,18 @@ def read_json(json_file):
     books = get_books(json_file)
     books_sorted = sort_by_month(books)
     return books_sorted
+
+def add_new_books(json_file, new_books):
+    """
+    Write the new books into the json database
+    Doesn't return anything
+
+    json_file -- a string, path of json database
+    new_books -- a list, new books to be added
+    """
+    old_books = get_books(json_file)
+    new_db = new_books + old_books
+    write_json(new_db, json_file)
 
 def add_tag(book, new_tag):
     """
