@@ -46,9 +46,3 @@ def test_add_tag():
     assert type(result) == dict
     assert result['test'] == 123
     assert result == {'title': 'La horde du contrevent', 'ISBN': '2070342263', 'author': 'Alain Damasio', 'date': 'July 1987', 'rating': 9.5, 'test': 123}
-
-def test_gen_unique_id():
-    book = {'title': 'La horde du contrevent', 'ISBN': '2070342263', 'author': 'Alain Damasio', 'date': 'July 1987', 'rating': 9.5}
-    result = db_actions.gen_unique_id(book)
-    assert type(result) == str
-    assert result == '5fe7e98204ef4ce91565fd8bfd560db6'
