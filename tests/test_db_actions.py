@@ -18,23 +18,23 @@ def test_sort_by_month():
     assert type(result[0]) == list
     assert result[0] == [{'ISBN': '9781401209971', 'author': 'Brian K. Vaughan', 'date': 'February 2020', 'id': '6cdd27a056c76e60743439a311a174f1', 'rating': 8.0, 'title': 'Ex Machina Vol 4'}]
 
-def test_write_json(tmpdir):
+def test_write_books(tmpdir):
     input_list = db_actions.get_books(json_file_path)
     result = tmpdir.join('result.txt')
-    db_actions.write_json(input_list, result)
+    db_actions.write_books(input_list, result)
     with open(json_file_path, 'r') as f:
         assert result.read() == f.read().rstrip()
 
-def test_read_json():
-    result = db_actions.read_json(json_file_path)
+def test_get_monthly_lists():
+    result = db_actions.get_monthly_lists(json_file_path)
     assert type(result) == list
     assert type(result[0]) == list
     assert result == [[{'ISBN': '9781401209971', 'author': 'Brian K. Vaughan', 'date': 'February 2020', 'id': '6cdd27a056c76e60743439a311a174f1', 'rating': 8.0, 'title': 'Ex Machina Vol 4'}], [{'ISBN': 'B01FNAQ2ZS', 'author': 'Tom King', 'date': 'January 2020', 'id': 'ca2b906efb7277baa8b1d632ed965146', 'rating': 7.5, 'title': 'The Vision #10'}]]
 
 def test_add_new_books(tmpdir):
     result = tmpdir.join('result.txt')
-    input_list = db_actions.read_json(json_file_path)
-    db_actions.write_json(input_list, result)
+    input_list = db_actions.get_monthly_lists(json_file_path)
+    db_actions.write_books(input_list, result)
     book = [{'title': 'La horde du contrevent', 'ISBN': '2070342263', 'author': 'Alain Damasio', 'date': 'July 1987', 'rating': 9.5}]
     db_actions.add_new_books(result, book)
     assert result.read() == '{"books": [{"title": "La horde du contrevent", "ISBN": "2070342263", "author": "Alain Damasio", "date": "July 1987", "rating": 9.5}, [{"title": "Ex Machina Vol 4", "author": "Brian K. Vaughan", "ISBN": "9781401209971", "rating": 8.0, "date": "February 2020", "id": "6cdd27a056c76e60743439a311a174f1"}], [{"title": "The Vision #10", "author": "Tom King", "ISBN": "B01FNAQ2ZS", "rating": 7.5, "date": "January 2020", "id": "ca2b906efb7277baa8b1d632ed965146"}]]}'
