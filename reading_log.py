@@ -3,7 +3,7 @@ import db_actions
 import web_render
 
 if __name__ == "__main__":
-    monthly_log = 'assets/monthly_reports/jul2020.txt'
+    monthly_log = 'assets/monthly_reports/aug2020.txt'
     json_file = 'assets/reading_log.json'
     template_path = 'templates/monthly_log.html'
     webpage_path = 'render/reading_log.html'
