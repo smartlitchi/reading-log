@@ -80,3 +80,11 @@ Finally, execute the script with :
 ```sh
 pipenv run python reading_log.py
 ```
+
+## Testing
+
+This program use [pytest](https://docs.pytest.org/en/stable/).
+
+```sh
+pipenv run pytest -v
+```
