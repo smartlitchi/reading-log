@@ -46,7 +46,13 @@ In the folder ``assets`` create two folders, ``covers`` and ``monthly_reports``.
 
 ### Record a book
 
-To record a book, add it to your monthly log. It's a basic text file. Its name must follow the convention ``<3-letters-month><year>.txt`` in order for the script to pick it. For example, ``oct2020.txt``. It also has to be in ``assets/monthly_reports``.
+To record a book, add it to your monthly log. It's a basic text file. Its name must follow this convention  for the script to pick it 
+
+```
+<3-letters-month><year>.txt
+```
+
+For example, ``oct2020.txt`` is a valid name. It also has to be in ``assets/monthly_reports``.
 
 Each entry must be separated by an empty line and be of the form :
 
