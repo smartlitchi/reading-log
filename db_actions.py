@@ -63,6 +63,7 @@ def add_new_books(json_file, new_books):
     old_books = get_books(json_file)
     new_db = new_books + old_books
     write_books(new_db, json_file)
+    print('new books added to database')
 
 def add_tag(book, new_tag):
     """
