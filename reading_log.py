@@ -11,3 +11,4 @@ if __name__ == "__main__":
     #db_actions.add_new_books(json_file, books_of_the_month)
     books_parsed = db_actions.get_monthly_lists(json_file)
     web_render.render_html(books_parsed, template_path, webpage_path)
+    web_render.copy_covers('assets/covers', 'render/covers')

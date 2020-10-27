@@ -1,4 +1,6 @@
 import jinja2
+import os
+import shutil
 
 def generate_html(books_list, template_path):
     """
@@ -24,3 +26,15 @@ def render_html(books, template_path, webpage_path):
     with open(webpage_path, 'w') as webpage:
         webpage.write(generate_html(books, template_path))
         print("webpage successfully rendered")
+
+def copy_covers(covers_fd_path, web_covers_fd_path):
+    """
+    Copy the covers to the web folder
+
+    covers_fd_path -- str, path of the folder where covers are saved
+    web_covers_fd_path -- str, path of the web folder where covers will be stored
+    """
+    new_covers = set(os.listdir(covers_fd_path)) - set(os.listdir(web_covers_fd_path))
+    for cover in new_covers:
+        shutil.copy2(covers_fd_path + '/' + cover, web_covers_fd_path + '/' + cover)
+    print("covers transfered")
