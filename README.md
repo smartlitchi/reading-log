@@ -69,18 +69,16 @@ The cover must be saved in ``assets/covers`` and its name must be ``<ISBN>.jpg``
 
 ### Update the database and generate the full html log
 
-Once a month, open ``reading_log.py`` and change this line :
-
-```py
-monthly_log = 'assets/monthly_reports/<your record>'
-```
-
-Then, comment out the line ``#db_actions.add_new_books(json_file, books_of_the_month)``.
-
-Finally, execute the script with :
+Once a month, execute the script with :
 
 ```sh
-pipenv run python reading_log.py
+pipenv run python reading_log.py <path_to_monthly_record>
+```
+
+For September 2020 for example, the command would be :
+
+```sh
+pipenv run python reading_log.py assets/monthly_reports/sep2020.txt
 ```
 
 ## Testing
