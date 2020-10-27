@@ -2,6 +2,8 @@
 
 Reading-Log is a small script to record your own reading. It generates a log in HTML format that you can put on your website. The log is highly inspired by [Good OK Bad](http://goodokbad.com/log.html)
 
+You can see an example [here](http://zimhat.info/reading-log)
+
 ## Requirements
 
 * python 3.8
