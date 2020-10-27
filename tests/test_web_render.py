@@ -7,10 +7,10 @@ def test_generate_html():
     result = web_render.generate_html(books, template_path)
     assert type(result) == str
     with open(render_witness, 'r') as witness:
-        assert result == witness.read()
+        assert result == witness.read().strip()
 
 def test_render_html(tmpdir):
     result = tmpdir.join('result.html')
     web_render.render_html(books, template_path, result)
     with open(render_witness, 'r') as witness:
-        assert result.read() == witness.read()
+        assert result.read() == witness.read().strip()
