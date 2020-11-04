@@ -22,8 +22,8 @@ def init_log(assets_folder, json_file):
         print('monthly reports folder already exists')
 
     if not os.path.exists(json_file):
-        database = open(json_file, 'w')
-        database.close()
+        with open(json_file, 'w') as database:
+            database.write('{"books": []}')
         print('database initiated')
     else:
         print('database already exists')
