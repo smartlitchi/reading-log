@@ -25,7 +25,13 @@ pipenv install
 
 ## Configuration
 
-In the folder ``assets`` create two folders, ``covers`` and ``monthly_reports``. Your repository tree should look like this.
+You need to initialize the different folders. Just type this command.
+
+```sh
+pipenv run python reading_log.py --init
+```
+
+Your repository tree should then look like this.
 
 ```sh
 .
