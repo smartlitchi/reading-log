@@ -14,6 +14,9 @@ if __name__ == "__main__":
         else:
             books_of_the_month = new_books.parse_new_books(sys.argv[-1])
             db_actions.add_new_books(json_file, books_of_the_month)
-    books_parsed = db_actions.get_monthly_lists(json_file)
-    web_render.render_html(books_parsed, template_path, webpage_path)
-    web_render.copy_covers('assets/covers', 'render/covers')
+    try:
+        books_parsed = db_actions.get_monthly_lists(json_file)
+        web_render.render_html(books_parsed, template_path, webpage_path)
+        web_render.copy_covers('assets/covers', 'render/covers')
+    except IndexError:
+        print('Database empty, nothing to render')
