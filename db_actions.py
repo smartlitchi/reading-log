@@ -1,5 +1,34 @@
+from pathlib import Path
+import os
 import json
 from dateutil.parser import parse
+
+def init_log(assets_folder, json_file):
+    """
+    Create the necessary folders and files before first time use
+
+    assets_folder -- str, path to the assets
+    json_file -- str, path of the database
+    """
+    covers = assets_folder + 'covers'
+    reports = assets_folder + 'monthly_reports'
+    try:
+        Path(covers).mkdir(parents=True)
+    except FileExistsError:
+        print('covers folder already exists')
+    try:
+        Path(reports).mkdir(parents=True)
+    except FileExistsError:
+        print('monthly reports folder already exists')
+
+    if not os.path.exists(json_file):
+        database = open(json_file, 'w')
+        database.close()
+        print('database initiated')
+    else:
+        print('database already exists')
+
+    print('Reading log ready to be used')
 
 def get_books(json_file):
     """
