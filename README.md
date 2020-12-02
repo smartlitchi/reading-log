@@ -7,7 +7,11 @@ You can see an example [here](http://zimhat.info/reading-log)
 ## Requirements
 
 * python 3.8
-* pipenv
+* pip
+* jinja2
+* python-dateutil
+
+For testing, this program use [pytest](https://docs.pytest.org/en/stable/).
 
 ## Installation
 
@@ -15,12 +19,13 @@ First, clone the repository :
 
 ```sh
 git clone git@github.com:zimhat/reading-log.git
+cd reading-log
 ```
 
-Then install required packages via ``pipenv``.
+Then install required packages via ``pip``.
 
 ```sh
-pipenv install
+pip install -r requirements.txt
 ```
 
 ## Configuration
@@ -28,7 +33,7 @@ pipenv install
 You need to initialize the different folders. Just type this command.
 
 ```sh
-pipenv run python reading_log.py --init
+python reading_log.py --init
 ```
 
 Your repository tree should then look like this.
@@ -78,19 +83,18 @@ The cover must be saved in ``assets/covers`` and its name must be ``<ISBN>.jpg``
 Once a month, execute the script with :
 
 ```sh
-pipenv run python reading_log.py <path_to_monthly_record>
+python reading_log.py <path_to_monthly_record>
 ```
 
 For September 2020 for example, the command would be :
 
 ```sh
-pipenv run python reading_log.py assets/monthly_reports/sep2020.txt
+python reading_log.py assets/monthly_reports/sep2020.txt
 ```
 
 ## Testing
 
-This program use [pytest](https://docs.pytest.org/en/stable/).
 
 ```sh
-pipenv run pytest -v
+pytest -v
 ```
