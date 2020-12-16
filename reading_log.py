@@ -17,6 +17,7 @@ if __name__ == "__main__":
     try:
         books_parsed = db_actions.get_monthly_lists(json_file)
         web_render.render_html(books_parsed, template_path, webpage_path)
-        web_render.copy_covers('assets/covers', 'render/covers')
+        new_covers = web_render.copy_covers('assets/covers', 'render/covers')
+        web_render.compress_new_covers(new_covers, 'render/covers')
     except IndexError:
         print('Database empty, nothing to render')
