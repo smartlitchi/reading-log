@@ -9,6 +9,7 @@ verify_ssl = true
 jinja2 = "*"
 python-dateutil = "*"
 pytest = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"
