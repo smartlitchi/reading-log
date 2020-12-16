@@ -1,6 +1,7 @@
 import jinja2
 import os
 import shutil
+from PIL import Image
 
 def generate_html(books_list, template_path):
     """
@@ -29,7 +30,7 @@ def render_html(books, template_path, webpage_path):
 
 def copy_covers(covers_fd_path, web_covers_fd_path):
     """
-    Copy the covers to the web folder
+    Copy the covers to the web folder and return a list of the new covers'names
 
     covers_fd_path -- str, path of the folder where covers are saved
     web_covers_fd_path -- str, path of the web folder where covers will be stored
@@ -38,3 +39,19 @@ def copy_covers(covers_fd_path, web_covers_fd_path):
     for cover in new_covers:
         shutil.copy2(covers_fd_path + '/' + cover, web_covers_fd_path + '/' + cover)
     print("covers transfered")
+    return new_covers
+
+def compress_new_covers(new_covers, web_covers_fd_path):
+    """
+    Compress the web covers
+
+    new_covers -- list, list of all the covers that are new
+    web_covers_fd_path -- str, path of the web folder where covers will be stored
+    """
+    for cover in new_covers:
+        cover_path = web_covers_fd_path + '/' + cover
+        cover_thumbnail = Image.open(cover_path)
+        cover_thumbnail.thumbnail(size=(300, 300))
+        new_cover_name = cover_path.split('.')
+        cover_thumbnail.save(new_cover_name[0] + "_thumbnail.jpg", "JPEG")
+    print("covers compressed")
