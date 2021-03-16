@@ -51,6 +51,7 @@ def compress_new_covers(new_covers, web_covers_fd_path):
     for cover in new_covers:
         cover_path = web_covers_fd_path + '/' + cover
         cover_thumbnail = Image.open(cover_path)
+        cover_thumbnail = cover_thumbnail.convert('RGB')
         cover_thumbnail.thumbnail(size=(300, 300))
         new_cover_name = cover_path.split('.')
         cover_thumbnail.save(new_cover_name[0] + "_thumbnail.jpg", "JPEG")
