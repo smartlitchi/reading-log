@@ -2,7 +2,7 @@
 
 Reading-Log is a small script to record your own reading. It generates a log in HTML format that you can put on your website. The log is highly inspired by [Good OK Bad](http://goodokbad.com/log.html)
 
-You can see an example [here](http://zimhat.info/reading-log)
+You can see an example [here](http://smartlitchi.info/reading-log)
 
 ## Requirements
 
@@ -18,7 +18,7 @@ For testing, this program use [pytest](https://docs.pytest.org/en/stable/).
 First, clone the repository : 
 
 ```sh
-git clone git@github.com:zimhat/reading-log.git
+git clone git@github.com:smartlitchi/reading-log.git
 cd reading-log
 ```
 
